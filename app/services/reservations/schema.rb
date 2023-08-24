@@ -22,19 +22,21 @@ module Reservations
     attr_reader :schema_hash, :params
 
     def reservation_hash
-      %w[code start_date end_date adults children infants status host_currency payout_price security_price].each_with_object({}) do |attribute, hash|
-        if schema_hash[attribute]
-          dig_params = schema_hash[attribute].split('#')
-          hash[attribute] = params.dig(*dig_params)
-        end
-        hash
-      end
+      attributes = %w[code start_date end_date adults children infants status host_currency payout_price security_price]
+      build_hash(attributes)
     end
 
     def guest_hash
-      %w[email first_name last_name phone_numbers].each_with_object({}) do |attribute, hash|
-        if schema_hash["guest_#{attribute}"]
-          dig_params = schema_hash["guest_#{attribute}"].split('#')
+      attributes = %w[email first_name last_name phone_numbers]
+      build_hash(attributes, 'guest')
+    end
+
+    def build_hash(attributes, key_prefix = nil)
+      attributes.each_with_object({}) do |attribute, hash|
+        key = key_prefix ? "#{key_prefix}_#{attribute}" : attribute
+
+        if schema_hash[key]
+          dig_params = schema_hash[key].split('#') # where "#" is used in the schema to denote nesting
           hash[attribute] = params.dig(*dig_params)
         end
         hash
