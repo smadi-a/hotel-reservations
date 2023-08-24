@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Reservations
-  class Create
+  class CreateOrUpdate
     attr_reader :error_message
 
     def initialize(reservation_hash)
@@ -13,7 +13,8 @@ module Reservations
     def call
       ActiveRecord::Base.transaction do
         guest_record = guest
-        reservation = Reservation.new(reservation_params.merge(guest_id: guest_record.id))
+        reservation = Reservation.find_or_initialize_by(code: reservation_params['code'])
+        reservation.assign_attributes(reservation_params.merge(guest_id: guest_record.id))
         reservation.save!
       end
       true

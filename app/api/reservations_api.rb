@@ -2,7 +2,7 @@
 
 class ReservationsAPI < ApplicationAPI
   resource :reservations do
-    desc 'Create'
+    desc 'Create or Update'
     post do
       schema_hash = Reservations::SchemaIdentifier.new(params).call
       unless schema_hash
@@ -11,13 +11,13 @@ class ReservationsAPI < ApplicationAPI
       end
 
       reservation_hash = Reservations::Schema.new(schema_hash).parse_data(params)
-      create_service = Reservations::Create.new(reservation_hash)
-      unless create_service.call
+      reservation_service = Reservations::CreateOrUpdate.new(reservation_hash)
+      unless reservation_service.call
         # TODO: log it somewhere
-        error!("Unable to create reservation. #{create_service.error_message}", 500)
+        error!("Unable to process reservation. #{reservation_service.error_message}", 422)
       end
 
-      send_success_message('Reservation successfully created')
+      send_success_message('Reservation successfully processed')
     end
   end
 end
