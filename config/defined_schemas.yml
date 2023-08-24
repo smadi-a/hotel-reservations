@@ -17,3 +17,22 @@ schemas:
     undefined_1: nights
     undefined_2: guests
     undefined_3: total_price
+  - identifier: 04a5fcec01567b88241a26cb925cbb3b
+    code: reservation#code
+    start_date: reservation#start_date
+    end_date: reservation#end_date
+    adults: reservation#guest_details#number_of_adults
+    children: reservation#guest_details#number_of_children
+    infants: reservation#guest_details#number_of_infants
+    status: reservation#status_type
+    host_currency: reservation#host_currency
+    payout_price: reservation#expected_payout_amount
+    security_price: reservation#listing_security_price_accurate
+    guest_email: reservation#guest_email
+    guest_first_name: reservation#guest_first_name
+    guest_last_name: reservation#guest_last_name
+    guest_phone_numbers: reservation#guest_phone_numbers
+    undefined_1: reservation#guest_details#localized_description
+    undefined_2: reservation#nights
+    undefined_3: reservation#number_of_guests
+    undefined_4: reservation#total_paid_amount_accurate
