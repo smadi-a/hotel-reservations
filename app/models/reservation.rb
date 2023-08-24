@@ -9,4 +9,13 @@ class Reservation < ApplicationRecord
   validates :infants, presence: true, numericality: { greater_than: -1 }
   validates :status, presence: true
   validates :host_currency, presence: true
+  validate :end_date_same_or_after_start_date
+
+  private
+
+  def end_date_same_or_after_start_date
+    if end_date < start_date
+      errors.add(:end_date, 'must be the same as or come after the start date')
+    end
+  end
 end
