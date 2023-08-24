@@ -14,7 +14,7 @@ class ReservationsAPI < ApplicationAPI
       create_service = Reservations::Create.new(reservation_hash)
       unless create_service.call
         # TODO: log it somewhere
-        error!("Unable to create reservation: #{create_service.error_messages.join(', ')}", 500)
+        error!("Unable to create reservation. #{create_service.error_message}", 500)
       end
 
       send_success_message('Reservation successfully created')

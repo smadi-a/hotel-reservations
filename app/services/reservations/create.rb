@@ -2,19 +2,24 @@
 
 module Reservations
   class Create
-    attr_reader :error_messages
+    attr_reader :error_message
 
     def initialize(reservation_hash)
       @reservation_params = reservation_hash.except('guest_params')
       @guest_params = reservation_hash['guest_params']
-      @error_messages = []
+      @error_message = nil
     end
 
     def call
-      reservation = Reservation.new(reservation_params.merge(guest_id: guest.id))
-      reservation.save
-      @error_messages = reservation.errors.full_messages
-      reservation.persisted?
+      ActiveRecord::Base.transaction do
+        guest_record = guest
+        reservation = Reservation.new(reservation_params.merge(guest_id: guest_record.id))
+        reservation.save!
+      end
+      true
+    rescue ActiveRecord::RecordInvalid => e
+      @error_message = e.message
+      false
     end
 
     private
