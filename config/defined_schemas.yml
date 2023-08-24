@@ -1,0 +1,19 @@
+schemas:
+  - identifier: 627d72ee4a75e19d607c07b885987ff8
+    code: reservation_code
+    start_date: start_date
+    end_date: end_date
+    adults: adults
+    children: children
+    infants: infants
+    status: status
+    host_currency: currency
+    payout_price: payout_price
+    security_price: security_price
+    guest_email: guest#email
+    guest_first_name: guest#first_name
+    guest_last_name: guest#last_name
+    guest_phone_numbers: guest#phone
+    undefined_1: nights
+    undefined_2: guests
+    undefined_3: total_price

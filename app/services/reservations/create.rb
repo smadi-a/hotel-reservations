@@ -5,8 +5,8 @@ module Reservations
     attr_reader :error_messages
 
     def initialize(reservation_hash)
-      @reservation_params = reservation_hash.except(:guest_params)
-      @guest_params = reservation_hash[:guest_params]
+      @reservation_params = reservation_hash.except('guest_params')
+      @guest_params = reservation_hash['guest_params']
       @error_messages = []
     end
 
@@ -22,7 +22,7 @@ module Reservations
     attr_reader :reservation_params, :guest_params
 
     def guest
-      record = Guest.find_or_initialize_by(email: guest_params[:email])
+      record = Guest.find_or_initialize_by(email: guest_params['email'])
       record.assign_attributes(guest_params)
       record.save if record.changed?
       record
