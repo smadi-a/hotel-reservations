@@ -16,11 +16,11 @@ module Reservations
         reservation = Reservation.find_or_initialize_by(code: reservation_params['code'])
         reservation.assign_attributes(reservation_params.merge(guest_id: guest_record.id))
         reservation.save!
+        reservation
       end
-      true
     rescue ActiveRecord::RecordInvalid => e
       @error_message = e.message
-      false
+      nil
     end
 
     private
