@@ -10,7 +10,11 @@ module Reservations
       @params = params
       return unless schema_hash
 
-      reservation_hash.merge(guest_params: guest_hash)
+      reservation_hash.merge(guest_params: guest_hash).tap do |hash|
+        unless hash.dig(:guest_params, :phone_numbers).is_a?(Array)
+          hash[:guest_params][:phone_numbers] = [hash.dig(:guest_params, :phone_numbers)]
+        end
+      end
     end
 
     private
