@@ -37,7 +37,7 @@ module Reservations
     end
 
     def schemas
-      @schemas ||= YAML.load_file(Rails.root.join('config', 'defined_schemas.yml')).map(&:last).flatten
+      DEFINED_SCHEMAS
     end
   end
 end
