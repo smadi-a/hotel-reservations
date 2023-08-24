@@ -16,8 +16,8 @@ class Reservation < ApplicationRecord
   private
 
   def end_date_same_or_after_start_date
-    if end_date < start_date
-      errors.add(:end_date, 'must be the same as or come after the start date')
-    end
+    return unless end_date < start_date
+
+    errors.add(:end_date, 'must be the same as or come after the start date')
   end
 end
