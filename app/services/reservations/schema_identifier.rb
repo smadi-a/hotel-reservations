@@ -7,6 +7,8 @@ module Reservations
     end
 
     def call
+      return nil if payload.blank?
+
       payload_props = HashProperties.new(payload).call
       schema_hash = schemas.detect { |schema| schema['identifier'] == payload_props.schema_md5_hash }
       return schema_hash unless schema_hash.nil?

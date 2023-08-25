@@ -1,5 +1,6 @@
 schemas:
   - identifier: 627d72ee4a75e19d607c07b885987ff8
+    partner: AirBnB
     code: reservation_code
     start_date: start_date
     end_date: end_date
@@ -18,6 +19,7 @@ schemas:
     undefined_2: guests
     undefined_3: total_price
   - identifier: 04a5fcec01567b88241a26cb925cbb3b
+    partner: Booking.com
     code: reservation#code
     start_date: reservation#start_date
     end_date: reservation#end_date

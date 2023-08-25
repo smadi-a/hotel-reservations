@@ -3,6 +3,8 @@
 require 'grape'
 
 class ApplicationAPI < Grape::API
+  use ::APIAuthMiddleware
+
   content_type :json, 'application/json; charset=utf-8'
   format :json
 
