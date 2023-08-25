@@ -49,5 +49,8 @@ group :development do
   # gem "spring"
   gem 'rubocop', require: false
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'factory_bot'
+  gem 'factory_bot_rails'
 end
 
